@@ -2,7 +2,6 @@ import { AuthProvider } from "./Context/AuthContext";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavbarFixed from "./Components/NavbarFixed";
-import Sidebar from "./Components/Sidebar";
 import Home from "./Pages/Home";
 import SignPage from "./Pages/SignPage";
 import TransactionPage from "./Pages/TransactionPage";

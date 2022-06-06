@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Card, ProgressBar } from "react-bootstrap";
 import AuthContext from "../../Context/AuthContext";
 import AddTransacGoal from "../Forms/AddTransacGoal";
@@ -16,7 +16,6 @@ const MoneyCard = ({ amount, title, saved, id }) => {
         Authorization: "Bearer " + String(authTokens.access),
       },
     });
-    let data = await response.json();
     if (response.status === 200) {
       //history("/");
       await createTransactionForGoal();
@@ -51,7 +50,6 @@ const MoneyCard = ({ amount, title, saved, id }) => {
         date: date,
       }),
     });
-    let data = await response.json();
     if (response.status === 200) {
       //history("/");
       //For now i use this because of time but its not a good solution to

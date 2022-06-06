@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { Bar, Line, Chart, Doughnut } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 const BarCard = ({ title, data, explanation }) => {
   return (

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import ColorLogo from "../Assets/Color logo.png";
-import { Form, Button } from "react-bootstrap";
 import SignForm from "../Components/Forms/SignForm";
 import AuthContext from "../Context/AuthContext";
 

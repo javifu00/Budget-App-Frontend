@@ -1,13 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  Form,
-  Button,
-  Modal,
-  InputGroup,
-  FormControl,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
+import { Form, Button, InputGroup, FormControl } from "react-bootstrap";
 import AuthContext from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -48,7 +40,6 @@ const CreateEditGoalForm = ({ creating, title, amount, saved, idGoal }) => {
         date: event.target.elements.formDate.value,
       }),
     });
-    let data = await response.json();
     if (response.statusText === "Unauthorized") {
       logoutUser();
     }
@@ -68,7 +59,6 @@ const CreateEditGoalForm = ({ creating, title, amount, saved, idGoal }) => {
         title: event.target.elements.formReceiver.value,
       }),
     });
-    let data = await response.json();
     if (response.status === 200) {
       //history("/");
       await createTransactionForGoal(event);

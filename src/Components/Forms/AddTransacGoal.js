@@ -44,7 +44,6 @@ const AddTransacGoal = ({ goal }) => {
         transaction_way: event.target.elements.formWay.value,
       }),
     });
-    let data = await response.json();
     if (response.status === 200) {
       //history("/");
       window.location.reload();
@@ -68,7 +67,6 @@ const AddTransacGoal = ({ goal }) => {
         date: event.target.elements.formDate.value,
       }),
     });
-    let data = await response.json();
     if (response.status === 200) {
       //history("/");
       //For now i use this because of time but its not a good solution to
@@ -92,7 +90,6 @@ const AddTransacGoal = ({ goal }) => {
         title: event.target.elements.formReceiver.value,
       }),
     });
-    let data = await response.json();
     if (response.status === 200) {
       //history("/");
       await createTransactionForGoal(event);

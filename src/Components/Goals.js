@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import MoneyCard from "./Cards/MoneyCard";
 import AddTransacGoal from "./Forms/AddTransacGoal";
-import AddEditGoalModal from "./Modals/AddEditGoalModal";
 
 const Goals = () => {
   let [goals, setGoals] = useState([]);

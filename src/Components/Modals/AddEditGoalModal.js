@@ -1,13 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  Form,
-  Button,
-  Modal,
-  InputGroup,
-  FormControl,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import AuthContext from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import CreateEditGoalForm from "../Forms/CreateEditGoalForm";
@@ -20,12 +12,6 @@ const AddEditGoalModal = ({ creating, id, title, amount, saved }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      Add Transaction
-    </Tooltip>
-  );
 
   const [validated, setValidated] = useState(false);
 

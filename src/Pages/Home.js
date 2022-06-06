@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Bar, Line, Chart, Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
 import Transaction from "../Components/Transaction";
-import { Card, Button, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import MoneyCard from "../Components/Cards/MoneyCard";
 import DoughnutCard from "../Components/Cards/DoughnutCard";
 import BarCard from "../Components/Cards/BarCard";
@@ -85,12 +83,6 @@ const Home = () => {
     { spend: 821.0, date: "03-01-2022" },
     { spend: 447.0, date: "04-01-2022" },
   ];
-
-  const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      Add Transaction
-    </Tooltip>
-  );
 
   return (
     <div className="d-flex justify-content-center my-5">
