@@ -58,13 +58,16 @@ const Home = () => {
 
   useEffect(() => {
     let getTransactions = async () => {
-      let response = await fetch("/transactions/", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
-        },
-      });
+      let response = await fetch(
+        "https://budget-app-javi.herokuapp.com/transactions/",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
+          },
+        }
+      );
       let data = await response.json();
 
       if (response.status === 200) {

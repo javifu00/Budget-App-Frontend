@@ -25,20 +25,23 @@ const CreateEditGoalForm = ({ creating, title, amount, saved, idGoal }) => {
         transacWay = "I";
       }
     }
-    let response = await fetch("/transactions/create/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-      body: JSON.stringify({
-        amount: amountToSave,
-        category: "goal",
-        receiver: title,
-        transaction_way: transacWay,
-        date: event.target.elements.formDate.value,
-      }),
-    });
+    let response = await fetch(
+      "https://budget-app-javi.herokuapp.com/transactions/create/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+        body: JSON.stringify({
+          amount: amountToSave,
+          category: "goal",
+          receiver: title,
+          transaction_way: transacWay,
+          date: event.target.elements.formDate.value,
+        }),
+      }
+    );
     if (response.statusText === "Unauthorized") {
       logoutUser();
     }
@@ -46,18 +49,21 @@ const CreateEditGoalForm = ({ creating, title, amount, saved, idGoal }) => {
   };
 
   const createGoal = async (event) => {
-    let response = await fetch("/goals/create/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-      body: JSON.stringify({
-        amount: event.target.elements.formAmount.value,
-        saved: event.target.elements.formSaved.value,
-        title: event.target.elements.formReceiver.value,
-      }),
-    });
+    let response = await fetch(
+      "https://budget-app-javi.herokuapp.com/goals/create/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+        body: JSON.stringify({
+          amount: event.target.elements.formAmount.value,
+          saved: event.target.elements.formSaved.value,
+          title: event.target.elements.formReceiver.value,
+        }),
+      }
+    );
     if (response.status === 200) {
       //history("/");
       await createTransactionForGoal(event);
@@ -75,18 +81,21 @@ const CreateEditGoalForm = ({ creating, title, amount, saved, idGoal }) => {
       alert("Saved can't be greater than amount");
       return;
     }
-    let response = await fetch(`/goals/${idGoal}/update/`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-      body: JSON.stringify({
-        amount: event.target.elements.formAmount.value,
-        saved: event.target.elements.formSaved.value,
-        title: title,
-      }),
-    });
+    let response = await fetch(
+      `https://budget-app-javi.herokuapp.com/goals/${idGoal}/update/`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+        body: JSON.stringify({
+          amount: event.target.elements.formAmount.value,
+          saved: event.target.elements.formSaved.value,
+          title: title,
+        }),
+      }
+    );
     if (response.status === 200) {
       //history("/");
       if (
