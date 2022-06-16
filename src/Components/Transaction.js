@@ -19,6 +19,7 @@ const Transaction = ({ loadPagination }) => {
 
       if (response.status === 200) {
         setTransactions(data["serializer"]);
+        setListToDisplay(transactions);
       } else if (response.statusText === "Unauthorized") {
         logoutUser();
       }
@@ -183,7 +184,7 @@ const Transaction = ({ loadPagination }) => {
           </tr>
         </thead>
         <tbody>
-          {listToDisplay.map((transac, index) => (
+          {transactions.map((transac, index) => (
             <tr key={index} className="my-4">
               <td className="col-md-4 text-capitalize">{transac.receiver}</td>
               <td className="col-md-3 text-capitalize">{transac.category}</td>

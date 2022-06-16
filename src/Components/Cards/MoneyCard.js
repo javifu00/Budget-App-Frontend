@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Card, ProgressBar } from "react-bootstrap";
 import AuthContext from "../../Context/AuthContext";
-import AddTransacGoal from "../Forms/AddTransacGoal";
+//import AddTransacGoal from "../Forms/AddTransacGoal";
 import AddEditGoalModal from "../Modals/AddEditGoalModal";
 
 const MoneyCard = ({ amount, title, saved, id }) => {
