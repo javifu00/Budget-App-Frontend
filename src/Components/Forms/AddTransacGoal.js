@@ -13,10 +13,9 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
 const AddTransacGoal = ({ goal }) => {
-  const [isGoal, setIsGoal] = useState(goal);
+  const isGoal = goal;
   const [show, setShow] = useState(false);
   let { authTokens, logoutUser } = useContext(AuthContext);
-  const history = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

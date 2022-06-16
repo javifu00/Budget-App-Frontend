@@ -5,25 +5,25 @@ import { useNavigate } from "react-router-dom";
 import CreateEditGoalForm from "../Forms/CreateEditGoalForm";
 
 const AddEditGoalModal = ({ creating, id, title, amount, saved }) => {
-  const [isCreating, setIsCreating] = useState(creating);
+  const isCreating = creating;
   const [show, setShow] = useState(false);
-  let { authTokens, logoutUser } = useContext(AuthContext);
-  const history = useNavigate();
+  //let { authTokens, logoutUser } = useContext(AuthContext);
+  //const history = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [validated, setValidated] = useState(false);
+  // const [validated, setValidated] = useState(false);
 
   return (
     <div className="px-0 d-flex justify-content-center mx-0">
       <Modal show={show} onHide={handleClose}>
         {isCreating ? (
-          <Modal.Header closeButton onClick={() => setValidated(false)}>
+          <Modal.Header closeButton /*onClick={() => setValidated(false)}*/>
             <Modal.Title>Add new goal</Modal.Title>
           </Modal.Header>
         ) : (
-          <Modal.Header closeButton onClick={() => setValidated(false)}>
+          <Modal.Header closeButton /*onClick={() => setValidated(false)}*/>
             <Modal.Title>Edit goal</Modal.Title>
           </Modal.Header>
         )}

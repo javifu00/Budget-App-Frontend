@@ -1,5 +1,4 @@
 import React from "react";
-import { Tooltip } from "react-bootstrap";
 import AddTransacGoal from "./Forms/AddTransacGoal";
 
 const AddTransactionButton = () => {

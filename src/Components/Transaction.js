@@ -7,10 +7,26 @@ const Transaction = ({ loadPagination }) => {
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
+    let getTransactions = async () => {
+      let response = await fetch("/transactions/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      });
+      let data = await response.json();
+
+      if (response.status === 200) {
+        setTransactions(data["serializer"]);
+      } else if (response.statusText === "Unauthorized") {
+        logoutUser();
+      }
+    };
     getTransactions();
   }, []);
 
-  let getTransactions = async () => {
+  /*let getTransactions = async () => {
     let response = await fetch("/transactions/", {
       method: "GET",
       headers: {
@@ -25,7 +41,7 @@ const Transaction = ({ loadPagination }) => {
     } else if (response.statusText === "Unauthorized") {
       logoutUser();
     }
-  };
+  };*/
 
   let deleteTransaction = async (id) => {
     fetch(`/transactions/${id}/delete/`, {
@@ -167,7 +183,7 @@ const Transaction = ({ loadPagination }) => {
           </tr>
         </thead>
         <tbody>
-          {transactions.map((transac, index) => (
+          {listToDisplay.map((transac, index) => (
             <tr key={index} className="my-4">
               <td className="col-md-4 text-capitalize">{transac.receiver}</td>
               <td className="col-md-3 text-capitalize">{transac.category}</td>

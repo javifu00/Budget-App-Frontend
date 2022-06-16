@@ -10,7 +10,7 @@ import AuthContext from "../Context/AuthContext";
 
 const Home = () => {
   let [transactions, setTransactions] = useState([]);
-  let [balance, setBalance] = useState([]);
+  //let [balance, setBalance] = useState([]);
   let [colorsDoughnut, setColorsDoughnut] = useState([]);
   let { authTokens, logoutUser } = useContext(AuthContext);
 
@@ -57,10 +57,27 @@ const Home = () => {
   };
 
   useEffect(() => {
+    let getTransactions = async () => {
+      let response = await fetch("/transactions/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      });
+      let data = await response.json();
+
+      if (response.status === 200) {
+        setTransactions(data);
+        getRandomColor(data["categoryAmount"].length);
+      } else if (response.statusText === "Unauthorized") {
+        logoutUser();
+      }
+    };
     getTransactions();
   }, []);
 
-  let getTransactions = async () => {
+  /*let getTransactions = async () => {
     let response = await fetch("/transactions/", {
       method: "GET",
       headers: {
@@ -76,13 +93,13 @@ const Home = () => {
     } else if (response.statusText === "Unauthorized") {
       logoutUser();
     }
-  };
+  };*/
 
-  let financialData = [
+  /*let financialData = [
     { spend: 245.0, date: "01-01-2022" },
     { spend: 821.0, date: "03-01-2022" },
     { spend: 447.0, date: "04-01-2022" },
-  ];
+  ];*/
 
   return (
     <div className="d-flex justify-content-center my-5">

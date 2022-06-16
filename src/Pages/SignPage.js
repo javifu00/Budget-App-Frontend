@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import ColorLogo from "../Assets/Color logo.png";
 import SignForm from "../Components/Forms/SignForm";
-import AuthContext from "../Context/AuthContext";
+//import AuthContext from "../Context/AuthContext";
 
 const SignPage = () => {
-  let { loginUser } = useContext(AuthContext);
-  const [register, setRegister] = useState(false);
+  //let { loginUser } = useContext(AuthContext);
+  //const [register, setRegister] = useState(false);
+  const register = false;
   return (
     <div
       className="d-flex justify-content-center"

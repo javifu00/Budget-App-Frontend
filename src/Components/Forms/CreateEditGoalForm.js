@@ -5,9 +5,8 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
 const CreateEditGoalForm = ({ creating, title, amount, saved, idGoal }) => {
-  const [isCreating, setIsCreating] = useState(creating);
+  const isCreating = creating;
   let { authTokens, logoutUser } = useContext(AuthContext);
-  const history = useNavigate();
 
   const [validated, setValidated] = useState(false);
 

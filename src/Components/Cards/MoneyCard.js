@@ -25,12 +25,6 @@ const MoneyCard = ({ amount, title, saved, id }) => {
     window.location.reload();
   };
 
-  let editGoal = async () => {
-    console.log("hola");
-    return <AddTransacGoal goal={false} edit={true} />;
-    window.location.reload();
-  };
-
   const createTransactionForGoal = async () => {
     let newDate = new Date();
     const offset = newDate.getTimezoneOffset();

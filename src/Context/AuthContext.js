@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
     history("/start");
   };
 
-  let updateToken = async () => {
+  /*let updateToken = async () => {
     let response = await fetch(
       "https://budget-app-javi.herokuapp.com/token/refresh/",
       {
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     if (loading) {
       setLoading(false);
     }
-  };
+  };*/
 
   let contextData = {
     user: user,
@@ -88,6 +88,32 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    let updateToken = async () => {
+      let response = await fetch(
+        "https://budget-app-javi.herokuapp.com/token/refresh/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            refresh: authTokens?.refresh,
+          }),
+        }
+      );
+      let data = await response.json();
+
+      if (response.status === 200) {
+        setAuthTokens(data);
+        setUser(jwt_decode(data.access));
+        localStorage.setItem("authTokens", JSON.stringify(data));
+      } else {
+        logoutUser();
+      }
+      if (loading) {
+        setLoading(false);
+      }
+    };
     if (loading) {
       updateToken();
     }
