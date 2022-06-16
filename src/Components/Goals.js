@@ -10,7 +10,7 @@ const Goals = () => {
   }, []);
 
   let getGoals = async () => {
-    let response = await fetch("/goals/");
+    let response = await fetch("https://budget-app-javi.herokuapp.com/goals/");
     let data = await response.json();
     setGoals(data);
   };
