@@ -35,7 +35,7 @@ const Home = () => {
     labels: transactions["expensesMonths"],
     datasets: [
       {
-        label: "Spenses",
+        label: "Expenses",
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
@@ -58,16 +58,13 @@ const Home = () => {
 
   useEffect(() => {
     let getTransactions = async () => {
-      let response = await fetch(
-        "https://budget-app-javi.herokuapp.com/transactions/",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + String(authTokens.access),
-          },
-        }
-      );
+      let response = await fetch("http://127.0.0.1:8000/transactions/home", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      });
       let data = await response.json();
 
       if (response.status === 200) {
@@ -138,6 +135,7 @@ const Home = () => {
                     <MoneyCard
                       amount={transactions["expenses"]}
                       title={"Expenses"}
+                      red={true}
                     />
                   </div>
                 </div>
@@ -147,16 +145,16 @@ const Home = () => {
               <div className="row align-items-top justify-content-center">
                 <div className="col-lg-6 col-md-6 col-sm-11 my-2">
                   <BarCard
-                    title={"Total Spenses"}
+                    title={"Total Expenses"}
                     data={state}
-                    explanation={"Total spenses by month"}
+                    explanation={"Total expenses by month"}
                   />
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-11 my-2">
                   <DoughnutCard
-                    title={"Spenses"}
+                    title={"Expenses"}
                     data={doughnutData}
-                    explanation={"Spenses group by category"}
+                    explanation={"Expenses group by category"}
                   />
                 </div>
               </div>

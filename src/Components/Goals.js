@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import MoneyCard from "./Cards/MoneyCard";
 import AddTransacGoal from "./Forms/AddTransacGoal";
+import AuthContext from "../Context/AuthContext";
 
 const Goals = () => {
   let [goals, setGoals] = useState([]);
+  let { authTokens, logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
     getGoals();
   }, []);
 
   let getGoals = async () => {
-    let response = await fetch("https://budget-app-javi.herokuapp.com/goals/");
+    let response = await fetch("http://127.0.0.1:8000/goals/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
     let data = await response.json();
     setGoals(data);
   };
