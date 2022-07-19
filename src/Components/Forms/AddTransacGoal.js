@@ -29,20 +29,23 @@ const AddTransacGoal = ({ goal }) => {
   const [validated, setValidated] = useState(false);
 
   const createTransaction = async (event) => {
-    let response = await fetch("http://127.0.0.1:8000/transactions/create/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-      body: JSON.stringify({
-        amount: event.target.elements.formAmount.value,
-        category: event.target.elements.formCategory.value,
-        date: event.target.elements.formDate.value,
-        receiver: event.target.elements.formReceiver.value,
-        transaction_way: event.target.elements.formWay.value,
-      }),
-    });
+    let response = await fetch(
+      "https://budget-app-javi.herokuapp.com/transactions/create/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+        body: JSON.stringify({
+          amount: event.target.elements.formAmount.value,
+          category: event.target.elements.formCategory.value,
+          date: event.target.elements.formDate.value,
+          receiver: event.target.elements.formReceiver.value,
+          transaction_way: event.target.elements.formWay.value,
+        }),
+      }
+    );
     if (response.status === 200) {
       //history("/");
       window.location.reload();
@@ -55,20 +58,23 @@ const AddTransacGoal = ({ goal }) => {
     if (event.target.elements.formSaved.value == 0) {
       return;
     }
-    let response = await fetch("http://127.0.0.1:8000/transactions/create/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-      body: JSON.stringify({
-        amount: event.target.elements.formSaved.value,
-        category: "goal",
-        receiver: event.target.elements.formReceiver.value,
-        transaction_way: "O",
-        date: event.target.elements.formDate.value,
-      }),
-    });
+    let response = await fetch(
+      "https://budget-app-javi.herokuapp.com/transactions/create/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+        body: JSON.stringify({
+          amount: event.target.elements.formSaved.value,
+          category: "goal",
+          receiver: event.target.elements.formReceiver.value,
+          transaction_way: "O",
+          date: event.target.elements.formDate.value,
+        }),
+      }
+    );
     if (response.status === 200) {
       //history("/");
       //For now i use this because of time but its not a good solution to
@@ -80,18 +86,21 @@ const AddTransacGoal = ({ goal }) => {
   };
 
   const createGoal = async (event) => {
-    let response = await fetch("http://127.0.0.1:8000/goals/create/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-      body: JSON.stringify({
-        amount: event.target.elements.formAmount.value,
-        saved: event.target.elements.formSaved.value,
-        title: event.target.elements.formReceiver.value,
-      }),
-    });
+    let response = await fetch(
+      "https://budget-app-javi.herokuapp.com/goals/create/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+        body: JSON.stringify({
+          amount: event.target.elements.formAmount.value,
+          saved: event.target.elements.formSaved.value,
+          title: event.target.elements.formReceiver.value,
+        }),
+      }
+    );
     if (response.status === 200) {
       //history("/");
       await createTransactionForGoal(event);

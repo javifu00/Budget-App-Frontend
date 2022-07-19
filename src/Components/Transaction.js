@@ -10,21 +10,27 @@ const Transaction = ({ loadPagination }) => {
     let getTransactions = async () => {
       let response = "";
       if (loadPagination) {
-        response = await fetch("http://127.0.0.1:8000/transactions/", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + String(authTokens.access),
-          },
-        });
+        response = await fetch(
+          "https://budget-app-javi.herokuapp.com/transactions/",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + String(authTokens.access),
+            },
+          }
+        );
       } else {
-        response = await fetch("http://127.0.0.1:8000/transactions/home", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + String(authTokens.access),
-          },
-        });
+        response = await fetch(
+          "https://budget-app-javi.herokuapp.com/transactions/home",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + String(authTokens.access),
+            },
+          }
+        );
       }
       let data = await response.json();
 
@@ -56,7 +62,7 @@ const Transaction = ({ loadPagination }) => {
   };*/
 
   let deleteTransaction = async (id) => {
-    fetch(`http://127.0.0.1:8000/transactions/${id}/delete/`, {
+    fetch(`https://budget-app-javi.herokuapp.com/transactions/${id}/delete/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
