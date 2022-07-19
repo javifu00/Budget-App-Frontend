@@ -4,52 +4,49 @@ import AuthContext from "../../Context/AuthContext";
 //import AddTransacGoal from "../Forms/AddTransacGoal";
 import AddEditGoalModal from "../Modals/AddEditGoalModal";
 
-const MoneyCard = ({ amount, title, saved, id }) => {
+const MoneyCard = ({ amount, title, saved, id, red }) => {
   const completed = (saved * 100) / amount;
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   let deleteGoal = async () => {
-    let response = await fetch(
-      `https://budget-app-javi.herokuapp.com/goals/${id}/delete/`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
-        },
-      }
-    );
+    let response = await fetch(`http://127.0.0.1:8000/goals/${id}/delete/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+    });
     if (response.status === 200) {
       //history("/");
       await createTransactionForGoal();
+      window.location.reload();
     } else if (response.statusText === "Unauthorized") {
       logoutUser();
     }
-    window.location.reload();
   };
 
   const createTransactionForGoal = async () => {
+    if (saved == 0) {
+      return;
+    }
     let newDate = new Date();
     const offset = newDate.getTimezoneOffset();
     let date = new Date(newDate.getTime() - offset * 120 * 1000);
     date = date.toISOString().split("T")[0];
-    let response = await fetch(
-      "https://budget-app-javi.herokuapp.com/transactions/create/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
-        },
-        body: JSON.stringify({
-          amount: saved,
-          category: "goal",
-          receiver: title,
-          transaction_way: "I",
-          date: date,
-        }),
-      }
-    );
+    let response = await fetch("http://127.0.0.1:8000/transactions/create/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + String(authTokens.access),
+      },
+      body: JSON.stringify({
+        amount: saved,
+        category: "goal",
+        receiver: title,
+        transaction_way: "I",
+        date: date,
+      }),
+    });
     if (response.status === 200) {
       //history("/");
       //For now i use this because of time but its not a good solution to
@@ -107,8 +104,8 @@ const MoneyCard = ({ amount, title, saved, id }) => {
             <div>
               <Card.Text className="text-capitalize">{title}</Card.Text>
               <div>
-                {amount > 0 ? (
-                  <h4>${amount}</h4>
+                {!red ? (
+                  <h4 className="text-success">${amount}</h4>
                 ) : (
                   <h4 className="text-danger">${amount}</h4>
                 )}
