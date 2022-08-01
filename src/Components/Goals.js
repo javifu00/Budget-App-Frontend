@@ -12,7 +12,7 @@ const Goals = () => {
   }, []);
 
   let getGoals = async () => {
-    let response = await fetch("http://127.0.0.1:8000/goals/", {
+    let response = await fetch("https://budget-app-javi.herokuapp.com/goals/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -9,13 +9,16 @@ const MoneyCard = ({ amount, title, saved, id, red }) => {
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   let deleteGoal = async () => {
-    let response = await fetch(`http://127.0.0.1:8000/goals/${id}/delete/`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-    });
+    let response = await fetch(
+      `https://budget-app-javi.herokuapp.com/goals/${id}/delete/`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      }
+    );
     if (response.status === 200) {
       //history("/");
       await createTransactionForGoal();
@@ -33,20 +36,23 @@ const MoneyCard = ({ amount, title, saved, id, red }) => {
     const offset = newDate.getTimezoneOffset();
     let date = new Date(newDate.getTime() - offset * 120 * 1000);
     date = date.toISOString().split("T")[0];
-    let response = await fetch("http://127.0.0.1:8000/transactions/create/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + String(authTokens.access),
-      },
-      body: JSON.stringify({
-        amount: saved,
-        category: "goal",
-        receiver: title,
-        transaction_way: "I",
-        date: date,
-      }),
-    });
+    let response = await fetch(
+      "https://budget-app-javi.herokuapp.com/transactions/create/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+        body: JSON.stringify({
+          amount: saved,
+          category: "goal",
+          receiver: title,
+          transaction_way: "I",
+          date: date,
+        }),
+      }
+    );
     if (response.status === 200) {
       //history("/");
       //For now i use this because of time but its not a good solution to
