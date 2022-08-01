@@ -22,11 +22,7 @@ const Transaction = ({ loadPagination }) => {
         );
       } else {
         response = await fetch(
-<<<<<<< HEAD
-          "https://budget-app-javi.herokuapp.com/transactions/home",
-=======
           "https://budget-app-javi.herokuapp.com/transactions/home/",
->>>>>>> dev
           {
             method: "GET",
             headers: {

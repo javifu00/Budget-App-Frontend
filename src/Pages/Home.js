@@ -59,11 +59,7 @@ const Home = () => {
   useEffect(() => {
     let getTransactions = async () => {
       let response = await fetch(
-<<<<<<< HEAD
-        "https://budget-app-javi.herokuapp.com/transactions/home",
-=======
         "https://budget-app-javi.herokuapp.com/transactions/home/",
->>>>>>> dev
         {
           method: "GET",
           headers: {
